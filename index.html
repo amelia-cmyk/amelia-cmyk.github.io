@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amelia Yusnita Sitanggang · QA Automation Engineer</title>
+    <meta
+      name="description"
+      content="QA Automation Engineer (Playwright, TypeScript, API testing) with a front-end background. Portfolio of test automation work and projects."
+    />
+    <meta property="og:title" content="Amelia Yusnita Sitanggang · QA Automation Engineer" />
+    <meta
+      property="og:description"
+      content="Playwright + TypeScript test automation: E2E, API, cross-browser, accessibility and CI/CD."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://amelia-cmyk.github.io/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111827'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%232dd4bf' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --ink: #111827;
+        --text: #1f2937;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --bg: #ffffff;
+        --soft: #f6f8fa;
+        --accent: #0f766e;
+        --accent-soft: #ecfdf8;
+        --accent-line: #a7e8d8;
+        --hero-text: #f9fafb;
+        --hero-muted: #cbd5e1;
+        --hero-accent: #2dd4bf;
+        --chip: #f1f5f9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      }
+      a {
+        color: var(--accent);
+      }
+      a:focus-visible {
+        outline: 3px solid var(--hero-accent);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+      .skip:focus {
+        left: 16px;
+        top: 16px;
+        background: #fff;
+        padding: 8px 12px;
+        z-index: 10;
+      }
+
+      /* ---------- Hero ---------- */
+      header.hero {
+        background: var(--ink);
+        color: var(--hero-text);
+        padding: 56px 0 44px;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(30px, 6vw, 46px);
+        line-height: 1.1;
+        letter-spacing: 0.01em;
+      }
+      .hero .role {
+        margin: 10px 0 0;
+        font-size: clamp(17px, 2.6vw, 21px);
+        font-weight: 600;
+        color: var(--hero-accent);
+      }
+      .hero .pitch {
+        max-width: 680px;
+        margin: 16px 0 0;
+        color: var(--hero-muted);
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+        padding: 0;
+        list-style: none;
+      }
+      .btn {
+        display: inline-block;
+        padding: 9px 16px;
+        border-radius: 8px;
+        border: 1px solid #374151;
+        color: var(--hero-text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .btn:hover {
+        border-color: var(--hero-accent);
+      }
+      .btn.primary {
+        background: var(--hero-accent);
+        border-color: var(--hero-accent);
+        color: var(--ink);
+      }
+      .hero .meta {
+        margin: 18px 0 0;
+        font-size: 14px;
+        color: var(--hero-muted);
+      }
+
+      /* ---------- Sections ---------- */
+      main section {
+        padding: 40px 0 8px;
+      }
+      h2 {
+        margin: 0 0 18px;
+        font-size: 22px;
+        color: var(--ink);
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--line);
+      }
+      h3 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--ink);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .stat {
+        background: var(--accent-soft);
+        border: 1px solid var(--accent-line);
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+      .stat b {
+        display: block;
+        font-size: 26px;
+        line-height: 1.2;
+        color: var(--accent);
+      }
+      .stat span {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .stack {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 28px;
+      }
+      .stack h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .chips li {
+        background: var(--chip);
+        border-radius: 6px;
+        padding: 3px 9px;
+        font-size: 14px;
+      }
+
+      /* ---------- Project cards ---------- */
+      .card {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px 22px;
+        margin-bottom: 18px;
+        break-inside: avoid;
+      }
+      .card.featured {
+        border-color: var(--accent-line);
+        border-left-color: var(--accent);
+        background: linear-gradient(180deg, var(--accent-soft), #fff 60%);
+      }
+      .card-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 4px 16px;
+        align-items: baseline;
+      }
+      .when {
+        font-size: 14px;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .sub {
+        margin: 2px 0 10px;
+        font-weight: 600;
+        color: var(--accent);
+        font-size: 15px;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: #fff;
+        border: 1px solid var(--accent-line);
+        border-radius: 999px;
+        padding: 1px 9px;
+        margin-bottom: 8px;
+      }
+      .card p {
+        margin: 6px 0;
+      }
+      .card ul {
+        margin: 8px 0 10px;
+        padding-left: 20px;
+      }
+      .card li {
+        margin: 3px 0;
+      }
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 22px;
+        margin: 10px 0;
+        padding: 0;
+        list-style: none;
+        font-size: 14px;
+      }
+      .flow li {
+        position: relative;
+        border: 1px solid var(--accent-line);
+        color: var(--accent);
+        background: #fff;
+        border-radius: 6px;
+        padding: 2px 9px;
+      }
+      .flow li + li::before {
+        content: '→';
+        color: var(--muted);
+        position: absolute;
+        left: -17px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .impact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 8px 0 4px;
+        padding: 0;
+        list-style: none;
+      }
+      .impact li {
+        background: var(--ink);
+        color: #f9fafb;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 14px;
+      }
+      .impact b {
+        color: var(--hero-accent);
+      }
+      .card .chips {
+        margin-top: 10px;
+      }
+      .card-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        margin-top: 12px;
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      /* ---------- How I test ---------- */
+      .steps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 28px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+      .steps li {
+        counter-increment: step;
+      }
+      .steps h3 {
+        font-size: 16px;
+      }
+      .steps h3::before {
+        content: counter(step) ' · ';
+        color: var(--accent);
+      }
+      .steps p {
+        margin: 4px 0 0;
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 40px;
+        background: var(--ink);
+        color: var(--hero-muted);
+        padding: 32px 0;
+      }
+      footer h2 {
+        color: var(--hero-text);
+        border: 0;
+        padding: 0;
+        margin-bottom: 8px;
+      }
+      footer a {
+        color: var(--hero-accent);
+      }
+      footer p {
+        margin: 6px 0;
+      }
+
+      @media (max-width: 720px) {
+        .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .stack,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        header.hero {
+          padding: 40px 0 32px;
+        }
+        .card {
+          padding: 16px;
+        }
+      }
+
+      /* ---------- Print / PDF ---------- */
+      @page {
+        size: A4;
+        margin: 12mm 0;
+      }
+      @page :first {
+        margin-top: 0;
+      }
+      @media print {
+        html {
+          scroll-behavior: auto;
+        }
+        body {
+          font-size: 12.5px;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .wrap {
+          max-width: none;
+          padding: 0 14mm;
+        }
+        header.hero {
+          padding: 26px 0 20px;
+        }
+        .hero h1 {
+          font-size: 30px;
+        }
+        .hero .role {
+          font-size: 17px;
+        }
+        .hero .meta {
+          font-size: 12px;
+        }
+        section[aria-labelledby='projects'] {
+          break-before: page;
+        }
+        h2,
+        h3 {
+          break-after: avoid;
+        }
+        .links {
+          display: none;
+        }
+        .print-only {
+          display: block !important;
+        }
+        main section {
+          padding: 18px 0 2px;
+        }
+        h2 {
+          font-size: 17px;
+          margin-bottom: 12px;
+        }
+        .card {
+          padding: 12px 16px;
+          margin-bottom: 12px;
+        }
+        .stat b {
+          font-size: 20px;
+        }
+        .chips li,
+        .flow,
+        .impact li,
+        .stat span,
+        .when,
+        .sub {
+          font-size: 11.5px;
+        }
+        footer {
+          margin-top: 18px;
+          padding: 16px 0;
+        }
+        .no-print {
+          display: none;
+        }
+      }
+      .print-only {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="hero">
+      <div class="wrap">
+        <h1>Amelia Yusnita Sitanggang</h1>
+        <p class="role">QA Automation Engineer · Playwright · TypeScript</p>
+        <p class="pitch">
+          I build reliable E2E, API and regression suites with Playwright, Cypress and TypeScript, verify data down to
+          the database, and run everything in CI. I spent years writing React.js front ends, so I understand the UI code
+          I test.
+        </p>
+        <ul class="links" aria-label="Contact and profiles">
+          <li><a class="btn primary" href="https://github.com/amelia-cmyk">GitHub</a></li>
+          <li>
+            <a class="btn" href="https://www.linkedin.com/in/amelia-yusnita-sitanggang-339942201/">LinkedIn</a>
+          </li>
+          <li><a class="btn" href="mailto:amelia.sitanggang321@gmail.com">Email me</a></li>
+        </ul>
+        <p class="meta">📍 Jakarta, Indonesia · Open to QA Automation roles</p>
+        <p class="meta print-only">
+          amelia.sitanggang321@gmail.com · github.com/amelia-cmyk · amelia-cmyk.github.io<br />
+          linkedin.com/in/amelia-yusnita-sitanggang-339942201
+        </p>
+      </div>
+    </header>
+
+    <main id="main">
+      <section aria-labelledby="about">
+        <div class="wrap">
+          <h2 id="about">About</h2>
+          <p>
+            QA Automation Engineer with nearly 4 years in web product teams, combining front-end development and software
+            testing. I turn Figma designs and acceptance criteria into test cases, automate what repeats, and confirm
+            critical actions at the API and database level, not just on screen.
+          </p>
+          <div class="stats">
+            <div class="stat"><b>~4 yrs</b><span>Front end &amp; QA experience</span></div>
+            <div class="stat"><b>150+</b><span>E2E test cases authored</span></div>
+            <div class="stat"><b>−40%</b><span>Regression execution time</span></div>
+            <div class="stat"><b>96</b><span>Tests in my open-source framework</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="stack">
+        <div class="wrap">
+          <h2 id="stack">Tech stack</h2>
+          <div class="stack">
+            <div>
+              <h3>Test automation</h3>
+              <ul class="chips">
+                <li>Playwright</li>
+                <li>Cypress</li>
+                <li>TypeScript</li>
+                <li>Playwright MCP</li>
+                <li>Page Object Model</li>
+                <li>E2E / Regression</li>
+                <li>Cross-browser &amp; Mobile</li>
+                <li>Accessibility (axe-core)</li>
+              </ul>
+            </div>
+            <div>
+              <h3>API &amp; data</h3>
+              <ul class="chips">
+                <li>Postman</li>
+                <li>Swagger</li>
+                <li>SoapUI</li>
+                <li>Hopscotch</li>
+                <li>SQL</li>
+                <li>PostgreSQL</li>
+                <li>MySQL</li>
+                <li>Oracle</li>
+                <li>DBeaver</li>
+              </ul>
+            </div>
+            <div>
+              <h3>CI/CD &amp; workflow</h3>
+              <ul class="chips">
+                <li>GitHub Actions</li>
+                <li>Git</li>
+                <li>ESLint</li>
+                <li>Prettier</li>
+                <li>Agile / Scrum</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Front end</h3>
+              <ul class="chips">
+                <li>React.js</li>
+                <li>JavaScript ES6+</li>
+                <li>HTML5 / CSS3</li>
+                <li>Tailwind</li>
+                <li>Redux</li>
+                <li>Microfrontend</li>
+                <li>Monorepo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="projects">
+        <div class="wrap">
+          <h2 id="projects">Projects</h2>
+
+          <article class="card featured">
+            <span class="tag">Open source · try it live</span>
+            <div class="card-head">
+              <h3>Playwright E2E &amp; API Test Framework</h3>
+              <span class="when">Personal project · 2026</span>
+            </div>
+            <p class="sub">Playwright · TypeScript · GitHub Actions · axe-core</p>
+            <p>
+              A production-style automation framework against public practice apps (OrangeHRM for UI, Restful-Booker for
+              API), built to show how I structure and run a real test suite.
+            </p>
+            <ul>
+              <li>Page Object Model, custom fixtures, and a one-time login reused across tests via storageState.</li>
+              <li>Runs on Chromium, Firefox, WebKit and mobile viewports (Pixel 7, iPhone 14).</li>
+              <li>WCAG 2.1 AA accessibility scans with a known-issues baseline: only new violations fail the build.</li>
+              <li>Typed REST API tests covering the full CRUD lifecycle and negative cases.</li>
+              <li>CI quality gates (type check, ESLint, Prettier), nightly runs, and the HTML report on GitHub Pages.</li>
+            </ul>
+            <ul class="impact" aria-label="Highlights">
+              <li><b>96</b> automated tests</li>
+              <li><b>5</b> browsers &amp; devices</li>
+              <li><b>0</b> hard waits</li>
+            </ul>
+            <div class="card-links">
+              <a href="https://github.com/amelia-cmyk/playwright-e2e-ts">Source code</a>
+              <a href="https://amelia-cmyk.github.io/playwright-e2e-ts/">Live test report</a>
+              <a href="https://github.com/amelia-cmyk/playwright-e2e-ts/actions">CI runs</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Enterprise SaaS Portal · QA Automation</h3>
+              <span class="when">Oct 2025 – Present</span>
+            </div>
+            <p class="sub">Client: PT Hyperscal Digital Indonesia · QA Engineer &amp; Automation Tester</p>
+            <p>
+              <strong>My role:</strong> own front-end test automation and end-to-end validation, from the UI down to the
+              database, across staging and pre-production.
+            </p>
+            <ol class="flow" aria-label="My testing workflow">
+              <li>Figma spec</li>
+              <li>Test cases</li>
+              <li>Playwright / Cypress (TS)</li>
+              <li>API check</li>
+              <li>DB check (SQL)</li>
+              <li>Bug report</li>
+            </ol>
+            <ul>
+              <li>Built regression suites with Playwright and Playwright MCP; added Cypress coverage for front-end flows.</li>
+              <li>Cross-checked UI actions against API responses and SQL queries to catch data mismatches early.</li>
+              <li>Reproduced and triaged defects with 10+ engineers and product owners, shortening fix cycles.</li>
+            </ul>
+            <ul class="impact" aria-label="Impact">
+              <li><b>−40%</b> execution time</li>
+              <li><b>−25%</b> critical prod bugs</li>
+              <li><b>+30%</b> automated coverage</li>
+              <li><b>−35%</b> validation cycle</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>KONNEK · Omnichannel Chat Platform</h3>
+              <span class="when">Dec 2022 – Jul 2025</span>
+            </div>
+            <p class="sub">Sprintasia Technology · Front End Developer &amp; QA</p>
+            <p>A customer-service platform that unifies chats from WhatsApp, Instagram, Shopee, Tokopedia and LINE.</p>
+            <ul>
+              <li>Built React.js UI modules in a microfrontend architecture for the 5 channel integrations.</li>
+              <li>Implemented SLA auto-close, CSAT feedback and spam blocking.</li>
+              <li>Built SysAdmin dashboards with role-based access control, so admins self-serve instead of raising tickets.</li>
+            </ul>
+            <ul class="impact" aria-label="Impact">
+              <li><b>+20%</b> agent efficiency</li>
+              <li><b>−15%</b> internal support tickets</li>
+              <li><b>5</b> channels integrated</li>
+            </ul>
+            <ul class="chips" aria-label="Technologies">
+              <li>React.js</li>
+              <li>Microfrontend</li>
+              <li>RBAC</li>
+              <li>REST API</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>API Validation &amp; Technical Documentation</h3>
+              <span class="when">Sprintasia · Konnek, Prezent, Sandeza</span>
+            </div>
+            <ul>
+              <li>Validated 50+ API endpoints with Postman, Swagger and SoapUI, cross-checking responses against MySQL data.</li>
+              <li>Produced 20+ flowcharts, ERDs, use-case diagrams and API documents for the team.</li>
+            </ul>
+            <ul class="impact" aria-label="Impact">
+              <li><b>50+</b> endpoints validated</li>
+              <li><b>−30%</b> onboarding time</li>
+            </ul>
+            <ul class="chips" aria-label="Technologies">
+              <li>Postman</li>
+              <li>Swagger</li>
+              <li>SoapUI</li>
+              <li>MySQL</li>
+              <li>Draw.io</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="how">
+        <div class="wrap">
+          <h2 id="how">How I test</h2>
+          <ol class="steps">
+            <li>
+              <h3>Understand the flow</h3>
+              <p>Read the design and acceptance criteria, then map happy paths, edge cases and boundary values.</p>
+            </li>
+            <li>
+              <h3>Automate what repeats</h3>
+              <p>Page-object suites in TypeScript with dynamic test data and network-aware waits, never fixed sleeps.</p>
+            </li>
+            <li>
+              <h3>Verify beyond the UI</h3>
+              <p>Confirm critical actions at the API and database level, and check accessibility, not just what is on screen.</p>
+            </li>
+            <li>
+              <h3>Report clearly, run continuously</h3>
+              <p>Reproducible steps and evidence for developers, with suites running in CI on every change.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <h2>Let's talk</h2>
+        <p>I'm open to QA Automation roles. The fastest way to reach me is email.</p>
+        <p>
+          <a href="mailto:amelia.sitanggang321@gmail.com">amelia.sitanggang321@gmail.com</a> ·
+          <a href="https://www.linkedin.com/in/amelia-yusnita-sitanggang-339942201/">LinkedIn</a> ·
+          <a href="https://github.com/amelia-cmyk">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
