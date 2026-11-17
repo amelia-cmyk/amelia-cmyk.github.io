@@ -398,6 +398,9 @@
         section[aria-labelledby='projects'] {
           break-before: page;
         }
+        section[aria-labelledby='how'] {
+          break-inside: avoid;
+        }
         h2,
         h3 {
           break-after: avoid;
@@ -451,9 +454,9 @@
         <h1>Amelia Yusnita Sitanggang</h1>
         <p class="role">QA Automation Engineer · Playwright · TypeScript</p>
         <p class="pitch">
-          I build reliable E2E, API and regression suites with Playwright, Cypress and TypeScript, verify data down to
-          the database, and run everything in CI. I spent years writing React.js front ends, so I understand the UI code
-          I test.
+          I build reliable E2E, API and regression suites with Playwright, Cypress and TypeScript, test across the whole
+          pyramid (unit, integration, contract and performance), and run everything in CI. I spent years writing React.js
+          front ends, so I understand the UI code I test.
         </p>
         <ul class="links" aria-label="Contact and profiles">
           <li><a class="btn primary" href="cv.pdf">Download CV (PDF)</a></li>
@@ -485,7 +488,7 @@
             <div class="stat"><b>~4 yrs</b><span>Front end &amp; QA experience</span></div>
             <div class="stat"><b>150+</b><span>E2E test cases authored</span></div>
             <div class="stat"><b>−40%</b><span>Regression execution time</span></div>
-            <div class="stat"><b>96</b><span>Tests in my open-source framework</span></div>
+            <div class="stat"><b>180+</b><span>Automated tests in my open-source projects</span></div>
           </div>
         </div>
       </section>
@@ -501,6 +504,10 @@
                 <li>Cypress</li>
                 <li>TypeScript</li>
                 <li>Playwright MCP</li>
+                <li>Vitest</li>
+                <li>Supertest</li>
+                <li>Pact (contract)</li>
+                <li>k6 (performance)</li>
                 <li>Page Object Model</li>
                 <li>E2E / Regression</li>
                 <li>Cross-browser &amp; Mobile</li>
@@ -579,6 +586,47 @@
               <a href="https://github.com/amelia-cmyk/playwright-e2e-ts">Source code</a>
               <a href="https://amelia-cmyk.github.io/playwright-e2e-ts/">Live test report</a>
               <a href="https://github.com/amelia-cmyk/playwright-e2e-ts/actions">CI runs</a>
+            </div>
+          </article>
+
+          <article class="card featured">
+            <span class="tag">Open source · full test strategy</span>
+            <div class="card-head">
+              <h3>API Test Pyramid: Library REST API</h3>
+              <span class="when">Personal project · 2026</span>
+            </div>
+            <p class="sub">TypeScript · Vitest · Supertest · PostgreSQL · Pact · k6</p>
+            <p>
+              A small library API (books, members, loans) tested at every level of the test pyramid, to show a complete
+              testing strategy: each risk is caught by the cheapest test that can catch it.
+            </p>
+            <ul>
+              <li>
+                <strong>Unit:</strong> business rules as pure functions, tested with boundary values and decision tables
+                (loan limit, late fee cap, ISBN-13 checksum).
+              </li>
+              <li>
+                <strong>Integration:</strong> real HTTP requests against a real PostgreSQL, including two members borrowing
+                the last copy at the same time, and checks that rejected requests leave no half-written data.
+              </li>
+              <li>
+                <strong>Contract:</strong> Pact consumer-driven contracts between a mobile app client and the API, so a
+                breaking change (like a renamed field) fails before deployment.
+              </li>
+              <li>
+                <strong>Performance:</strong> k6 load test with 20 virtual users and per-endpoint p95 budgets calibrated
+                from a measured baseline.
+              </li>
+              <li>Test quality checked by deliberately injecting bugs and confirming the suite catches them.</li>
+            </ul>
+            <ul class="impact" aria-label="Highlights">
+              <li><b>84</b> unit &amp; integration tests</li>
+              <li><b>100%</b> line coverage</li>
+              <li><b>4</b> pyramid layers in CI</li>
+            </ul>
+            <div class="card-links">
+              <a href="https://github.com/amelia-cmyk/api-test-pyramid">Source code</a>
+              <a href="https://github.com/amelia-cmyk/api-test-pyramid/actions">CI runs</a>
             </div>
           </article>
 
@@ -671,8 +719,11 @@
               <p>Read the design and acceptance criteria, then map happy paths, edge cases and boundary values.</p>
             </li>
             <li>
-              <h3>Automate what repeats</h3>
-              <p>Page-object suites in TypeScript with dynamic test data and network-aware waits, never fixed sleeps.</p>
+              <h3>Test at the right level</h3>
+              <p>
+                Each risk at the cheapest level that catches it: unit, integration, contract or E2E, with stable data and
+                no fixed sleeps.
+              </p>
             </li>
             <li>
               <h3>Verify beyond the UI</h3>
